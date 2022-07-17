@@ -1,0 +1,31 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.register input {
+  width: 15.6em;
+  height: 1.76em;
+  font-size: 15px;
+  padding-left: 5px;
+  margin-bottom: 0.4em;
+  border: 1px solid rgba(128, 128, 128, 0.521);
+  border-radius: 0.3em;
+}
+
+.register button {
+  width: 7em;
+  height: 2.5em;
+  border-radius: 0.4em;
+  border: transparent;
+  margin-top: 1%;
+}
