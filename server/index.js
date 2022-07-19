@@ -22,13 +22,18 @@ app.post('/registerRead', (request, response) => {
     db.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
-      const sql = "INSERT INTO readAlready (title, author, publishedIn, rating) VALUES (?, ?, ?, ?)";
-      db.query(sql, [title, author, publishedIn, rating], function (err, result) {
+      db.query("INSERT INTO readAlready (title, author, publishedIn, rating) VALUES (?, ?, ?, ?)", [title, author, publishedIn, rating], function (err, result) {
         if (err) throw err;
-        console.log("inserted");
+        console.log("Inserted");
       });
     });
-
 });
 
-app.listen(3000, () => {console.log('servidor 3000')});
+app.get('/readBooks', (request, response) => {
+  db.query("SELECT * FROM readAlready;", (err, result) => {
+    if (err) throw err;
+      response.send(result);
+  })
+});
+
+app.listen(3000, () => {console.log('Server 3000')});
