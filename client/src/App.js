@@ -11,6 +11,8 @@ function App() {
 
   const [readBooks, setReadBooks] = useState([]);
 
+  const [newTitle, setNewTitle] = useState("");
+
   const addBookRead = () => {
     Axios.post("http://localhost:3000/registerRead", {
       title: title, 
@@ -25,6 +27,31 @@ function App() {
   const getReadBooks = () => {
     Axios.get("http://localhost:3000/readBooks").then((response) => {
       setReadBooks(response.data);
+    });
+  }
+
+  const updateTitle = (id) => {
+    Axios.put("http://localhost:3000/editReadBooks", {
+      title: newTitle,
+      id: id
+    }).then((response) => {
+      setReadBooks(setReadBooks.map((val)=> {
+        return val.id == id ? {
+          id: val.id,
+          title: val.newTitle,
+          author: val.author,
+          publishedIn: val.publishedIn,
+          rating: val.rating
+        } : val
+      }));
+      document.alert('updated!');
+    });
+  }
+
+  const deleteReadBooks = (id) => {
+    Axios.delete(`http://localhost:3000/deleteReadBooks/${id}`).then((response) => {
+      setReadBooks(setReadBooks.filter((val) => {return val.id == id}));
+      document.alert('deleted!');
     });
   }
  
@@ -63,6 +90,14 @@ function App() {
             <h3>Author: {val.author}</h3>
             <h3>Published In: {val.publishedIn}</h3>
             <h3>Rating: {val.rating}</h3>
+            <div> 
+              {" "}
+              <input id='tt' type='text' onChange={(event) => (setNewTitle(event.target.value))} /> 
+              <button className='changeBtns' onClick={() => {updateTitle(val.id)}}> UPDATE TITLE </button>
+
+              {" "}
+              <button className='changeBtns' onClick={() => {deleteReadBooks(val.id)}}>DELETE</button>
+            </div>
           </div>;
         })}
       </div>
