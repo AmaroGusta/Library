@@ -16,21 +16,48 @@ const db = mysql.createConnection({
 app.post('/registerRead', (request, response) => {
     const title = request.body.title;
     const author = request.body.author;
-    const publishedIn = Number(request.body.publishedIn);
-    const rating = Number(request.body.rating);
+    const publishedIn = request.body.publishedIn;
+    const rating = request.body.rating;
 
-    db.connect(function(err) {
+    db.connect((err) => {
       if (err) throw err;
       console.log("Connected!");
-      db.query("INSERT INTO readAlready (title, author, publishedIn, rating) VALUES (?, ?, ?, ?)", [title, author, publishedIn, rating], function (err, result) {
-        if (err) throw err;
-        console.log("Inserted");
-      });
     });
+
+    db.query("INSERT INTO readAlready (title, author, publishedIn, rating) VALUES (?, ?, ?, ?)", 
+    [title, author, publishedIn, rating],
+    (err, result) => {
+      if (err) throw err;
+      console.log(response);
+    });
+   
+    db.end(); 
 });
 
 app.get('/readBooks', (request, response) => {
   db.query("SELECT * FROM readAlready;", (err, result) => {
+    if (err) throw err;
+      response.send(result);
+  })
+});
+
+app.put('/editReadBooks', (request, response) => {
+  const id = request.body.id;
+  const title = request.body.title;
+  
+  db.query('UPDATE readAlready SET title = ? WHERE id = ?;', 
+  [title, id], 
+  (err, result) => {
+    if (err) throw err;
+      response.send(result);
+  })
+});
+
+app.delete('/deleteReadBooks/:id', (request, response) => {
+  const id = request.params.id;
+
+  db.query("DELETE FROM readAlready WHERE id = ?;", id,
+  (err, result) => {
     if (err) throw err;
       response.send(result);
   })
