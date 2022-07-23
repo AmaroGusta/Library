@@ -1,33 +1,98 @@
 * {
-  background-color: rgba(255, 255, 246, 0.842);
+  margin: 0;
+  padding: 0;
+  background-color: #193152;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: Lemon-Regular;
+  src: url(lemon-regular.otf);
+}
+
+@font-face {
+  font-family: Lemon-Light;
+  src: url(lemon-light.otf);
+}
+
+body {
+  overflow-y: scroll; 
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .App {
-  display: flex;
+  display: stretch;
   flex-direction: column;
   justify-content: center;
 }
 
-.Title {
-  margin: 1.5% 0 1.2% 5%;
-  font-family: 'Courier New', Courier, monospace;
+header {
+  width: 100%;
+  height: 4.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5em 10%;
+}
+
+#title {
+  font-size: 2.6em;
+  letter-spacing: 3.5px;
+  color: #e63946;
+  font-family: Lemon-Regular;
+}
+
+nav li {
+  display: inline-block;
+  list-style: none;
+}
+
+.Link {
+  padding: 0 1.25em;
+  font-family: Lemon-Regular;
+  letter-spacing: 1.5px;
+  
+  transition: 0.6s ease;
+}
+
+.Link:link {
+  color: #f1faee;
+  font-style: none;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.Link:visited {
+  color: #f1faee;
+}
+
+.Link:hover {
+  color: #457b9d;
 }
 
 .register {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 45%;
   align-items: center;
   justify-content: center;
-  font-family: 'Courier New', Courier, monospace;
+  margin-top: 2%;
+  font-family: Lemon-Light;
+  float: left;
 }
 
 .register h2 {
-  width: 10em;
+  color: #f1faee;
+  margin-bottom: 1%;
+  font-size: 1.6em;
 }
 
 .register label {
-  width: 14.9em;
+  width: 15em;
+  color: #a8dadc;
 }
 
 input {
@@ -36,13 +101,21 @@ input {
   font-size: 15px;
   padding-left: 5px;
   margin-bottom: 0.75em;
-  border: 1px solid rgba(128, 128, 128, 0.521);
+  
+  background-color: #a8dadc;
+  border: transparent;
   border-radius: 0.3em;
   font-family: 'Courier New', Courier, monospace;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input:focus {
-  background-color: rgba(241, 241, 241, 0.671);
+  background-color: #8ec8ca;
   outline: none;
 }
 
@@ -52,9 +125,9 @@ button {
   border-radius: 0.4em;
   border: transparent;
   margin-top: 1%;
-  background-color: rgba(241, 241, 241, 0.671);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 0.9em;
+  background-color: #8ec8cae7;
+  font-family: Lemon-Regular;
+  font-size: 0.8em;
 
   transition: ease 0.8s;
 }
@@ -66,7 +139,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(223, 223, 223, 0.89);
+  background-color: #a8dadc;
 }
 
 .readBtn {
@@ -77,25 +150,29 @@ button:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  margin-top: 10%;
-  font-family: 'Courier New', Courier, monospace;
+  width: 55%;
+  float: right;
+  margin-top: 2%;
+  font-family: Lemon-Light;
+}
+
+.readBooks h2 {
+  color: #f1faee;
 }
 
 .readBook {
-  width: 50em;
+  width: 35em;
   height: 6.5em;
-  border: 1px solid black;
+  border: 1px solid #a8dadc;
   margin: 10px;
   display: flex;
   padding: 10px;
-  background-color: rgba(253, 253, 253, 0.829);
 }
 
 .readBook h3 {
   margin: 20px;
-  font-size: 1em;
-  background-color: rgba(253, 253, 253, 0.829);
+  font-size: 0.9em;
+  color: #a8dadc;
 }
 
 #tt {
